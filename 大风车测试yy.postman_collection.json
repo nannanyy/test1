@@ -1,0 +1,599 @@
+{
+	"info": {
+		"_postman_id": "0b6b5964-203e-47ad-86f6-f3b8f262d672",
+		"name": "大风车测试yy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "erp",
+			"item": [
+				{
+					"name": "登录",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "92b790b7-0a21-4373-8a04-25db6ea7ed82",
+								"exec": [
+									"pm.test(\"checkout\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var loginName=jsonData.data.loginName;",
+									"    var nickName=jsonData.data.nickName;",
+									"    var store=jsonData.data.store;",
+									"    var storeName=jsonData.data.storeName;",
+									"    var token=jsonData.data.token;",
+									"    ",
+									"    pm.expect(loginName).to.eql(\"17758031018\");",
+									"    pm.expect(nickName).to.eql(\"杨莹\");",
+									"    pm.expect(store).to.eql(\"01134710\");",
+									"    pm.expect(storeName).to.eql(\"光大金服测试店1\");    //校验信息",
+									"    ",
+									"pm.globals.set(\"token\",token);    //获取token，创建为全局变量",
+									"",
+									"pm.globals.set(\"shopcode\",store);    //获取店铺ID，创建为全局变",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{seapig}}/rest/account/login?loginName=17758031018&password=souche2015",
+							"host": [
+								"{{seapig}}"
+							],
+							"path": [
+								"rest",
+								"account",
+								"login"
+							],
+							"query": [
+								{
+									"key": "loginName",
+									"value": "17758031018"
+								},
+								{
+									"key": "password",
+									"value": "souche2015"
+								}
+							]
+						},
+						"description": "登录"
+					},
+					"response": []
+				},
+				{
+					"name": "访问车辆详情",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6c5349c1-aa58-46c5-b0fe-27f3d0b15061",
+								"exec": [
+									"pm.test(\"Your test name\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var data=jsonData.data;",
+									"    ",
+									"    pm.expect(data.carStatus).to.eql(\"在售\");",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "_security_token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{erp}}/app/car/appCarSearchAction/getCarDetail.json?carId=5558ad0481f740e294f928bb7fbd8810",
+							"host": [
+								"{{erp}}"
+							],
+							"path": [
+								"app",
+								"car",
+								"appCarSearchAction",
+								"getCarDetail.json"
+							],
+							"query": [
+								{
+									"key": "carId",
+									"value": "5558ad0481f740e294f928bb7fbd8810"
+								},
+								{
+									"key": "token",
+									"value": "02_j1Mj_o6qQ3ULaW7",
+									"disabled": true
+								}
+							]
+						},
+						"description": "环境变量"
+					},
+					"response": [
+						{
+							"name": "{{erp}} /app/car/appCarSearchAction/getCarDetail.json",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{erp}}/app/car/appCarSearchAction/getCarDetail.json?carId=5558ad0481f740e294f928bb7fbd8810",
+									"host": [
+										"{{erp}}"
+									],
+									"path": [
+										"app",
+										"car",
+										"appCarSearchAction",
+										"getCarDetail.json"
+									],
+									"query": [
+										{
+											"key": "carId",
+											"value": "5558ad0481f740e294f928bb7fbd8810"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "openresty"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 23 Jan 2019 13:30:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "81"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, PUT, OPTIONS, DELETE"
+								},
+								{
+									"key": "Access-Control-Max-Age",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, TT, _security_token"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"登录超时,请刷新页面重新登录\",\n    \"code\": \"10001\",\n    \"success\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "获取店铺信息",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "71287c50-751c-43f5-9aaa-1a9b3a109571",
+								"exec": [
+									"pm.test(\"Your test name\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var userDefinedNumber = jsonData.data.userDefinedNumber",
+									"    ",
+									"pm.globals.set(\"userDefinedNumber\", userDefinedNumber);",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{erp}}/pc/shop/shopaction/getCurrentShop.json?_security_token={{token}}",
+							"host": [
+								"{{erp}}"
+							],
+							"path": [
+								"pc",
+								"shop",
+								"shopaction",
+								"getCurrentShop.json"
+							],
+							"query": [
+								{
+									"key": "_security_token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "发车",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8503abe5-9051-465c-9b65-1f1a4a43ec36",
+								"exec": [
+									"pm.test(\"carID\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var carId=jsonData.data.carId",
+									"    ",
+									"pm.globals.set(\"carId\", carId);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a6e58b05-5e30-490e-b355-cfab70f3ec36",
+								"exec": [
+									"pm.sendRequest(\"http://erp.dev.dasouche.net/pc/shop/shopaction/getCurrentShop.json?_security_token=02_0Ko0_o6qQ3ULaW7/GET\", function (err, response) {",
+									"    console.log(response.json());",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "_security_token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{erp}}/pc/car/carSaveUpdateAction/saveOrUpdateCarInfo.json?carInfoJsonBean={\"isNewCar\":0,\"userDefinedStatus\":\"IN_EXHIBITION_HALL\",\"vinNumber\":\"AAABBBCCCDDDEE{{$randomInt}}\",\"saleType\":1,\"mileage\":20000,\"firstLicensePlateDate\":1546272000000,\"priceGuide\":294300,\"color\":6,\"plateNumber\":\"\",\"useType\":\"\",\"ownership\":\"\",\"engineNumber\":\"\",\"interiorColor\":\"\",\"productionDate\":\"\",\"annualExpiresDate\":1609430400000,\"userDefinedNumber\":\"{{userDefinedNumber}}\",\"vendorAuthentication\":\"\",\"maintenanceFrom4S\":\"\",\"vehicleCondition\":\"\",\"brand\":\"brand-15\",\"brandName\":\"奥迪\",\"series\":\"series-1204\",\"seriesName\":\"奥迪A4\",\"model\":\"32498\",\"modelName\":\"2008款  奥迪A4  1.8T 自动舒适型\",\"province\":\"00974\",\"city\":\"00975\",\"registerProvince\":\"\",\"registerCity\":\"\",\"colorNameAlias\":\"\",\"innerColorNameAlias\":\"\",\"purchaseTax\":\"\",\"newCarReceipt\":\"\",\"drivingLicense\":\"\",\"outOfWarranty\":\"\",\"registrationCertificate\":\"\",\"peopleIdentity\":\"\",\"originalicensePlate\":\"\",\"newCarMaintenanceManual\":\"\",\"isInsuranceExpired\":-1,\"isCommercialInsuranceExpired\":-1,\"isVehicleAndVesselTaxExpired\":-1,\"insuranceExpiresDate\":\"\",\"vehicleInstructions\":\"\",\"commercialInsuranceExpiresDate\":\"\",\"commercialInsurancePayment\":\"\",\"vehicleAndVesselTaxExpiresDate\":\"\",\"roadAndBridgeExpiresDate\":\"\",\"guohuPrice\":1,\"fenqi\":1,\"exhibitionPrice\":\"\",\"downPayment\":\"\",\"monthlyPayment\":\"\",\"loanPeriod\":\"\",\"mortgage\":\"\",\"sellerPhone\":\"17600000089\",\"onlineWholesalePrice\":\"\",\"withWholesaleTransferPrice\":1,\"assessor\":\"\",\"contractSignDate\":\"\",\"store\":\"01134710\",\"sellerType\":\"private\",\"bankAccount\":\"\",\"sellerName\":\"\",\"sellerIdNumber\":\"\",\"phone\":\"\",\"payee\":\"\",\"mentalPrice\":\"\",\"bankName\":\"\",\"level\":\"\",\"sellerSource\":\"\",\"otherAccount\":\"\",\"address\":\"\",\"contactPhone\":\"18502966063\",\"summary\":\"\",\"advertisingWords\":\"\",\"carRemark\":\"\",\"transferDate\":-1,\"modelConfigUuid\":\"6ea81b3cb96b4445992371a90e02f299\",\"hasAccidentRecordCode\":\"\",\"carId\":\"\",\"actionSource\":\"souche_entering\"}",
+							"host": [
+								"{{erp}}"
+							],
+							"path": [
+								"pc",
+								"car",
+								"carSaveUpdateAction",
+								"saveOrUpdateCarInfo.json"
+							],
+							"query": [
+								{
+									"key": "carInfoJsonBean",
+									"value": "{\"isNewCar\":0,\"userDefinedStatus\":\"IN_EXHIBITION_HALL\",\"vinNumber\":\"AAABBBCCCDDDEE{{$randomInt}}\",\"saleType\":1,\"mileage\":20000,\"firstLicensePlateDate\":1546272000000,\"priceGuide\":294300,\"color\":6,\"plateNumber\":\"\",\"useType\":\"\",\"ownership\":\"\",\"engineNumber\":\"\",\"interiorColor\":\"\",\"productionDate\":\"\",\"annualExpiresDate\":1609430400000,\"userDefinedNumber\":\"{{userDefinedNumber}}\",\"vendorAuthentication\":\"\",\"maintenanceFrom4S\":\"\",\"vehicleCondition\":\"\",\"brand\":\"brand-15\",\"brandName\":\"奥迪\",\"series\":\"series-1204\",\"seriesName\":\"奥迪A4\",\"model\":\"32498\",\"modelName\":\"2008款  奥迪A4  1.8T 自动舒适型\",\"province\":\"00974\",\"city\":\"00975\",\"registerProvince\":\"\",\"registerCity\":\"\",\"colorNameAlias\":\"\",\"innerColorNameAlias\":\"\",\"purchaseTax\":\"\",\"newCarReceipt\":\"\",\"drivingLicense\":\"\",\"outOfWarranty\":\"\",\"registrationCertificate\":\"\",\"peopleIdentity\":\"\",\"originalicensePlate\":\"\",\"newCarMaintenanceManual\":\"\",\"isInsuranceExpired\":-1,\"isCommercialInsuranceExpired\":-1,\"isVehicleAndVesselTaxExpired\":-1,\"insuranceExpiresDate\":\"\",\"vehicleInstructions\":\"\",\"commercialInsuranceExpiresDate\":\"\",\"commercialInsurancePayment\":\"\",\"vehicleAndVesselTaxExpiresDate\":\"\",\"roadAndBridgeExpiresDate\":\"\",\"guohuPrice\":1,\"fenqi\":1,\"exhibitionPrice\":\"\",\"downPayment\":\"\",\"monthlyPayment\":\"\",\"loanPeriod\":\"\",\"mortgage\":\"\",\"sellerPhone\":\"17600000089\",\"onlineWholesalePrice\":\"\",\"withWholesaleTransferPrice\":1,\"assessor\":\"\",\"contractSignDate\":\"\",\"store\":\"01134710\",\"sellerType\":\"private\",\"bankAccount\":\"\",\"sellerName\":\"\",\"sellerIdNumber\":\"\",\"phone\":\"\",\"payee\":\"\",\"mentalPrice\":\"\",\"bankName\":\"\",\"level\":\"\",\"sellerSource\":\"\",\"otherAccount\":\"\",\"address\":\"\",\"contactPhone\":\"18502966063\",\"summary\":\"\",\"advertisingWords\":\"\",\"carRemark\":\"\",\"transferDate\":-1,\"modelConfigUuid\":\"6ea81b3cb96b4445992371a90e02f299\",\"hasAccidentRecordCode\":\"\",\"carId\":\"\",\"actionSource\":\"souche_entering\"}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取销售人员",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{oms}}/shop/shopAction/getSales.json?shopCode={{shopcode}}",
+							"host": [
+								"{{oms}}"
+							],
+							"path": [
+								"shop",
+								"shopAction",
+								"getSales.json"
+							],
+							"query": [
+								{
+									"key": "shopCode",
+									"value": "{{shopcode}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "出售",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "审批",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "oms",
+			"item": [
+				{
+					"name": "预定",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "_security_token",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{oms}}/pc/car/finance/orderaction/reserver.json?orderVO={\ncustomerId:2497107,\nsellerCode:{{shopcode}},\ncarId:{{carId}},\norderStatus:1000,\nsalesId:2497107,\npayType:2,\npayTypeFormat:2,\ngoodsAmount:20,\ncreateTime:2019/01/31,\nreserveTime:2019/02/01\nreserveTimeFormat:2019/02/02\nrealPayAmount:21,\nrealPayAmountFormat:22,\nbuyerPhone:17758031018,\nbuyerName:杨莹2,\nbuyerType:PRIVATE ,\nsalesName:杨莹}",
+							"host": [
+								"{{oms}}"
+							],
+							"path": [
+								"pc",
+								"car",
+								"finance",
+								"orderaction",
+								"reserver.json"
+							],
+							"query": [
+								{
+									"key": "orderVO",
+									"value": "{\ncustomerId:2497107,\nsellerCode:{{shopcode}},\ncarId:{{carId}},\norderStatus:1000,\nsalesId:2497107,\npayType:2,\npayTypeFormat:2,\ngoodsAmount:20,\ncreateTime:2019/01/31,\nreserveTime:2019/02/01\nreserveTimeFormat:2019/02/02\nrealPayAmount:21,\nrealPayAmountFormat:22,\nbuyerPhone:17758031018,\nbuyerName:杨莹2,\nbuyerType:PRIVATE ,\nsalesName:杨莹}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取消预定",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "撤销审批",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "预定-转出售",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "出售",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "回库",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "audit",
+			"item": [
+				{
+					"name": "预定审批-通过",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "预定审批-拒绝",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "关闭审批设置",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "cef24c76-71ef-40c0-bcbd-f5f8dcdc3a46",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "52cfb878-7441-4774-a330-34bb8065ec2d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
